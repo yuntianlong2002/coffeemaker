@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html ng-app="root" data-framework="firebase">
+<html ng-app="coffeeApp" data-framework="firebase">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -32,9 +32,11 @@
     </head>
     <body>
         <div class="container">
-        <div ng-controller="index">
-          <h1 id="headline">Friend Finder</h1>
+        <div ng-controller="CoffeeController">
+          <h1 id="headline">Coffee Maker</h1>
           <div class="block">
+          <span class="right">{{iflogin()}}</span>
+          <a ng-click="loginFacebook()"><img src="img/facebook.png" width="24px" height="24px" style="display: inline-block;vertical-align: 3px;"/></a>
           <input type="text" ng-model="query.name" class="search" placeholder="Search friends.." />
           <button ng-click="reverse()">Reverse Order</button>
           <input type="text" ng-model="newName" class="third" placeholder="Name.." />

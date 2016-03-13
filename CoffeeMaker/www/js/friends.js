@@ -1,4 +1,81 @@
-var friendsList = angular.module("root", []);
+angular.module('coffeeApp', ["firebase"])
+  .controller('CoffeeController', function CoffeeController($scope, $rootScope, $firebaseArray) {
+
+		var url = 'https://coffeemaker.firebaseio.com';
+    var fireRef = new Firebase(url);
+		
+		fireRef.onAuth(function(authData) {
+      if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        updateRootScope(authData.facebook.displayName, authData.facebook.id);
+        updateData($rootScope.userid);
+      } else {
+        console.log("User is logged out");
+      }
+    });
+		
+		
+		$scope.orderList = "name";
+		$scope.query;
+		
+		function updateData(uid) {
+      url = 'https://coffeemaker.firebaseio.com/' + uid + '/friendlist';
+      fireRef = new Firebase(url);
+      // Bind the todos to the firebase provider.
+      $scope.friends = $firebaseArray(fireRef);
+      $scope.newFriend = '';
+    }
+		
+		function updateRootScope(display_name, id) {
+      $rootScope.display_name = display_name;
+      $rootScope.userid = id;
+    }
+		
+		// Helper function for login.
+    function login(service_name) {
+      // Check if already logged in.
+      if (!$rootScope.display_name) {
+          fireRef.authWithOAuthPopup(service_name, function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+          } else {
+            if (service_name == "google") {
+              updateRootScope(authData.google.displayName, authData.google.id);
+            } else if (service_name == "facebook") {
+              updateRootScope(authData.facebook.displayName, authData.facebook.id);
+            }
+            updateData($rootScope.userid);
+          }
+        }, {
+          scope: "email" // the permissions requested
+        });
+      } else {
+        $rootScope.display_name = "";
+        //Replace with local user id
+        fireRef.unauth();
+        updateData($rootScope.tempuser);
+      }
+    }
+
+    $scope.loginGoogle = function() {
+      login("google");
+    }
+
+    $scope.loginFacebook = function() {
+      login("facebook");
+    }
+		
+		// When logged in, this function will return the user's full name from
+    // Google or Facebook stored in a global scope.
+    $scope.iflogin = function() {
+      if(!$rootScope.display_name)
+        return "";
+      return $rootScope.display_name;
+    }
+		
+	});
+
+/*var friendsList = angular.module("root", []);
 
 friendsList.controller("index", ["$scope", "$http", function ($scope, $http) {
 	    $scope.orderList = "name";
@@ -70,4 +147,4 @@ friendsList.controller("index", ["$scope", "$http", function ($scope, $http) {
 		}
 	    };
       
-	}]);
+	}]);*/
