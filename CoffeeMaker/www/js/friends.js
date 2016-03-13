@@ -27,7 +27,7 @@ angular.module('coffeeApp', ["firebase"])
     }
 		
 		function updateRootScope(display_name, id) {
-      $rootScope.display_name = display_name;
+      $rootScope.display_name = id;
       $rootScope.userid = id;
     }
 		
