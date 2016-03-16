@@ -40,30 +40,11 @@
           <span class="right">{{iflogin()}}</span>
           <a ng-click="loginFacebook()"><img src="img/facebook.png" width="24px" height="24px" style="display: inline-block;vertical-align: 3px;"/></a>
           <input type="text" ng-model="query.name" class="search" placeholder="Search friends.." />
+          <div id="slider"></div>
+          <p>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+          </p>
           
-          <div class="scroll-pane ui-widget ui-widget-header ui-corner-all">
-            <div class="scroll-content">
-              <div class="scroll-content-item ui-widget-header">6AM</div>
-              <div class="scroll-content-item ui-widget-header">7AM</div>
-              <div class="scroll-content-item ui-widget-header">8AM</div>
-              <div class="scroll-content-item ui-widget-header">9AM</div>
-              <div class="scroll-content-item ui-widget-header">10AM</div>
-              <div class="scroll-content-item ui-widget-header">11AM</div>
-              <div class="scroll-content-item ui-widget-header">12AM</div>
-              <div class="scroll-content-item ui-widget-header">1PM</div>
-              <div class="scroll-content-item ui-widget-header">2PM</div>
-              <div class="scroll-content-item ui-widget-header">3PM</div>
-              <div class="scroll-content-item ui-widget-header">4PM</div>
-              <div class="scroll-content-item ui-widget-header">5PM</div>
-              <div class="scroll-content-item ui-widget-header">6PM</div>
-              <div class="scroll-content-item ui-widget-header">7PM</div>
-              <div class="scroll-content-item ui-widget-header">8PM</div>
-              <div class="scroll-content-item ui-widget-header">9PM</div>
-            </div>
-            <div class="scroll-bar-wrap ui-widget-content ui-corner-bottom">
-              <div class="scroll-bar"></div>
-            </div>
-          </div>
           
           <!-- <button ng-click="reverse()">Reverse Order</button> -->
           <!--<input type="text" ng-model="newName" class="third" placeholder="Name.." />-->
